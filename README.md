@@ -35,4 +35,4 @@ This REST API is created to feed my portfolio with programming quotes.
 	```
 
 #### Live Demo
-	[zer0exploit.pythonanywhere.com](https://zer0exploit.pythonanywhere.com/quotes)
+[zer0exploit.pythonanywhere.com](https://zer0exploit.pythonanywhere.com/quotes)
