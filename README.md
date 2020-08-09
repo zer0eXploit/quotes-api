@@ -1,6 +1,6 @@
-# Quotes Rest API
+# Quotes REST API
 
-REST API is created to feed my portfolio with programming quotes.
+This REST API is created to feed my portfolio with programming quotes.
 
 ### Docs
 
@@ -25,4 +25,14 @@ REST API is created to feed my portfolio with programming quotes.
 	POST
 	* /login - Returns access_token, required: username, password
 	* Supply in header - Authorization: Bearer access_token
+#### Run
+	Please install requirements first.
+	Please also supply your own environment variables.
+	1. DB_URL
+	2. APP_SECRET
+	```python
+	python3 app.py
+	```
 
+#### Live Demo
+	[zer0exploit.pythonanywhere.com](https://zer0exploit.pythonanywhere.com/quotes)
