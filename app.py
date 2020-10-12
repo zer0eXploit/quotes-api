@@ -3,26 +3,21 @@ import os
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 from resources.quote import Quote_By_Id, Quotes, Random_Quote
 from resources.user import User_Login, User_Register
 from db import db
 
 app = Flask('__main__')
+cors = CORS(app, resources={r"*": {"origins": "https://yanwaipann.tech"}})
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    'DB_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
-app.config['JWT_SECRET_KEY'] = os.environ.get(
-    'APP_SECRET', 'Super Secure Secret!@_@')
+app.config['JWT_SECRET_KEY'] = os.environ.get('APP_SECRET')
 
 api = Api(app)
-
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 
 jwt = JWTManager(app)

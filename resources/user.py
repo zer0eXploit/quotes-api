@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from werkzeug.security import safe_str_cmp
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -33,7 +33,7 @@ class User_Login(Resource):
 
         user = User_Model.get_user_by_username(post_data["username"])
 
-        if user and safe_str_cmp(user.password, post_data["password"]):
+        if user and check_password_hash(user.password, post_data["password"]):
             access_token = create_access_token(
                 identity=user.user_id, fresh=True
             )
@@ -54,6 +54,7 @@ class User_Register(Resource):
         if user:
             return {"message": "Username already exists."}, 400
 
+        post_data["password"] = generate_password_hash(post_data["password"])
         user = User_Model(**post_data)
         user.save_to_db()
         return {
